@@ -1,5 +1,7 @@
 const path = require("path");
 
+const srcDir = path.resolve(__dirname, "src");
+
 module.exports = {
   mode: "development",
   entry: "./src/index.js",
@@ -11,8 +13,8 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.css$/i,
-        use: ["style-loader", "css-loader"],
+        test: /\.scss$/,
+        use: ["style-loader", "css-loader", "sass-loader"],
       },
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
