@@ -3,13 +3,14 @@
 :root {
     --main-light: #EBF2D4;
     --main-dark: #040F0F;
-    --main-color: #5363B7;
+    --main-color: #939fd8;
     --accent: #386641;
 }
 
 html {
     box-sizing: border-box;
     font-family: 'VT323', monospace;
+    height: 100%;
 }
 
 *,
@@ -20,3 +21,37 @@ html {
     padding: 0;
 }
 
+body {
+    background-image: url('assets/background.jpeg');
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-position: center center; 
+    background-size: cover;
+    display: grid;
+}
+
+.widget {
+    background-color: var(--main-dark);
+    opacity: 0.8;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px;
+    color: var(--main-light);
+    font-size: 1.2rem;
+    font-weight: 400;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    width: fit-content;
+    height: fit-content;
+}
+
+.current-weather-widget__title,
+.forecast-weather-widget__title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: var(--main-color);
+}
