@@ -12,13 +12,8 @@ console.log(getForecastWeather());
 
 const body = document.querySelector("body");
 
-const bird1 = document.createElement("div");
-bird1.classList.add("bird");
-bird1.setAttribute("id", "bird1");
+const testDiv = document.createElement("div");
+testDiv.classList.add("testDiv");
+testDiv.textContent = "Hello World";
 
-const bird2 = document.createElement("div");
-bird2.classList.add("bird");
-bird2.setAttribute("id", "bird2");
-
-body.appendChild(bird1);
-body.appendChild(bird2);
+body.appendChild(testDiv);
