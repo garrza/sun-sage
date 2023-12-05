@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
+:root {
+    --main-light: #EBF2D4;
+    --main-dark: #040F0F;
+    --main-color: #5363B7;
+    --accent: #386641;
+}
+
+html {
+    box-sizing: border-box;
+    font-family: 'VT323', monospace;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+    margin: 0;
+    padding: 0;
+}
