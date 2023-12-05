@@ -20,14 +20,4 @@ async function getForecastWeather() {
   return data;
 }
 
-function getLocalTime(data) {
-  let date = new Date();
-  let time = date.getTime();
-  let localOffset = date.getTimezoneOffset() * 60000;
-  let utc = time + localOffset;
-  let localTime = utc + 1000 * data;
-  let localTimeDate = new Date(localTime);
-  return localTimeDate.toLocaleString();
-}
-
-export default { getCurrentWeather, getForecastWeather, getLocalTime };
+export default { getCurrentWeather, getForecastWeather };

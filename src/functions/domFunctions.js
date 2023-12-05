@@ -1,10 +1,8 @@
-import {
-  getCurrentWeather,
-  getForecastWeather,
-  getLocalTime,
-} from "./apiFunctions.js";
+import apiFunctions from "./apiFunctions.js";
 
-const createCurrentWeatherWidget = () => {
+const { getCurrentWeather, getForecastWeather } = apiFunctions;
+
+const createCurrentWeatherWidget = async () => {
   const currentWeatherWidget = document.createElement("div");
   const currentWeatherWidgetLocation = document.createElement("div");
   const currentWeatherWidgetDate = document.createElement("div");
@@ -41,7 +39,7 @@ const createCurrentWeatherWidget = () => {
   currentWeatherWidget.appendChild(currentWeatherWidgetWind);
   currentWeatherWidget.appendChild(currentWeatherWidgetHumidity);
 
-  const currentWeatherData = getCurrentWeather();
+  const currentWeatherData = await getCurrentWeather();
 
   currentWeatherWidgetLocation.textContent = currentWeatherData.location.name;
   currentWeatherWidgetDate.textContent = currentWeatherData.location.localtime;
@@ -58,11 +56,11 @@ const createCurrentWeatherWidget = () => {
   return currentWeatherWidget;
 };
 
-const createForecastWeatherWidget = () => {
+const createForecastWeatherWidget = async () => {
   const forecastWeatherWidget = document.createElement("div");
   forecastWeatherWidget.classList.add("forecast-weather-widget");
 
-  const forecastWeatherData = getForecastWeather();
+  const forecastWeatherData = await getForecastWeather();
   const forecastWeatherDays = forecastWeatherData.forecast.forecastday;
 
   forecastWeatherDays.forEach((day) => {
@@ -107,23 +105,41 @@ const createForecastWeatherWidget = () => {
 
 const createTimeWidget = () => {
   const timeWidget = document.createElement("div");
-  const timeDiv = document.createElement("div");
-  timeDiv.classList.add("time-div");
+  const timeWidgetTime = document.createElement("div");
+  const timeWidgetDate = document.createElement("div");
 
-  timeDiv.textContent = getLocalTime();
-  timeWidget.appendChild(timeDiv);
+  timeWidget.classList.add("time-widget");
+  timeWidgetTime.classList.add("time-widget__time");
+  timeWidgetDate.classList.add("time-widget__date");
+
+  timeWidget.appendChild(timeWidgetTime);
+  timeWidget.appendChild(timeWidgetDate);
+
+  const date = new Date();
+
+  timeWidgetTime.textContent = date.toLocaleTimeString();
+  timeWidgetDate.textContent = date.toLocaleDateString();
+
+  setInterval(() => {
+    const date = new Date();
+
+    timeWidgetTime.textContent = date.toLocaleTimeString();
+    timeWidgetDate.textContent = date.toLocaleDateString();
+  }, 1000);
 
   return timeWidget;
 };
 
-const initialize = () => {
+const initialize = async () => {
   const body = document.querySelector("body");
 
-  const currentWeatherWidget = createCurrentWeatherWidget();
-  const forecastWeatherWidget = createForecastWeatherWidget();
+  const currentWeatherWidget = await createCurrentWeatherWidget();
+  const forecastWeatherWidget = await createForecastWeatherWidget();
   const timeWidget = createTimeWidget();
 
   body.appendChild(currentWeatherWidget);
   body.appendChild(forecastWeatherWidget);
   body.appendChild(timeWidget);
 };
+
+export default initialize;
