@@ -14,7 +14,7 @@ const createCurrentWeatherWidget = async () => {
   const currentWeatherWidgetWind = document.createElement("div");
   const currentWeatherWidgetHumidity = document.createElement("div");
 
-  currentWeatherWidget.classList.add("current-weather-widget");
+  currentWeatherWidget.classList.add("widget");
   currentWeatherWidgetLocation.classList.add(
     "current-weather-widget__location"
   );
@@ -41,8 +41,6 @@ const createCurrentWeatherWidget = async () => {
   currentWeatherWidget.appendChild(currentWeatherWidgetTemperatureF);
   currentWeatherWidget.appendChild(currentWeatherWidgetCondition);
   currentWeatherWidget.appendChild(currentWeatherWidgetConditionIcon);
-  currentWeatherWidget.appendChild(currentWeatherWidgetWind);
-  currentWeatherWidget.appendChild(currentWeatherWidgetHumidity);
 
   const currentWeatherData = await getCurrentWeather();
 
@@ -55,9 +53,6 @@ const createCurrentWeatherWidget = async () => {
     currentWeatherData.current.condition.text;
   currentWeatherWidgetConditionIcon.src =
     currentWeatherData.current.condition.icon;
-  currentWeatherWidgetWind.textContent = currentWeatherData.current.wind_kph;
-  currentWeatherWidgetHumidity.textContent =
-    currentWeatherData.current.humidity;
 
   return currentWeatherWidget;
 };
@@ -65,7 +60,7 @@ const createCurrentWeatherWidget = async () => {
 const createForecastWeatherWidget = async () => {
   const forecastWeatherWidget = document.createElement("div");
   const forecastWeatherWidgetTitle = document.createElement("div");
-  forecastWeatherWidget.classList.add("forecast-weather-widget");
+  forecastWeatherWidget.classList.add("widget");
 
   forecastWeatherWidgetTitle.classList.add("forecast-weather-widget__title");
   forecastWeatherWidgetTitle.textContent = "Forecast Weather";
@@ -145,16 +140,40 @@ const createTimeWidget = () => {
   return timeWidget;
 };
 
+const createFooter = () => {
+  const footer = document.createElement("footer");
+  footer.classList.add("footer");
+
+  const copyright = document.createElement("p");
+  copyright.textContent = `Copyright © ${new Date().getFullYear()} @garrza`;
+
+  const githubLink = document.createElement("a");
+  githubLink.href = "https://github.com/garrza";
+
+  const githubIcon = document.createElement("i");
+  githubIcon.classList.add("fab");
+  githubIcon.classList.add("fa-github");
+  githubIcon.setAttribute("style", "color : #5363b7");
+
+  githubLink.appendChild(githubIcon);
+  footer.appendChild(copyright);
+  footer.appendChild(githubLink);
+
+  return footer;
+};
+
 const initialize = async () => {
   const body = document.querySelector("body");
 
   const currentWeatherWidget = await createCurrentWeatherWidget();
   const forecastWeatherWidget = await createForecastWeatherWidget();
   const timeWidget = createTimeWidget();
+  const footer = createFooter();
 
   body.appendChild(currentWeatherWidget);
   body.appendChild(forecastWeatherWidget);
   body.appendChild(timeWidget);
+  body.appendChild(footer);
 };
 
 export default initialize;
