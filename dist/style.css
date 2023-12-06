@@ -53,6 +53,7 @@ body {
     justify-content: center;
     align-items: center;
     grid-area: widget;
+    min-width: 200px;
 }
 
 .widget {
