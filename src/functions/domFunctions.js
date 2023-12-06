@@ -151,9 +151,10 @@ const createFooter = () => {
   githubLink.href = "https://github.com/garrza";
 
   const githubIcon = document.createElement("i");
-  githubIcon.classList.add("fab");
+  githubIcon.classList.add("fa-brands");
   githubIcon.classList.add("fa-github");
-  githubIcon.setAttribute("style", "color : #5363b7");
+  githubIcon.classList.add("fa-spin-pulse");
+  githubIcon.setAttribute("style", "color : #ebf2d4");
 
   githubLink.appendChild(githubIcon);
   footer.appendChild(copyright);
@@ -167,12 +168,16 @@ const initialize = async () => {
 
   const currentWeatherWidget = await createCurrentWeatherWidget();
   const forecastWeatherWidget = await createForecastWeatherWidget();
+  const weatherWidgetsContainer = document.createElement("div");
   const timeWidget = createTimeWidget();
   const footer = createFooter();
 
-  body.appendChild(currentWeatherWidget);
-  body.appendChild(forecastWeatherWidget);
+  weatherWidgetsContainer.classList.add("weather-widgets-container");
+  weatherWidgetsContainer.appendChild(currentWeatherWidget);
+  weatherWidgetsContainer.appendChild(forecastWeatherWidget);
+
   body.appendChild(timeWidget);
+  body.appendChild(weatherWidgetsContainer);
   body.appendChild(footer);
 };
 

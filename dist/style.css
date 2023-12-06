@@ -7,6 +7,15 @@
     --accent: #386641;
 }
 
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
+:root {
+    --main-light: #EBF2D4;
+    --main-dark: #040F0F;
+    --main-color: #939fd8;
+    --accent: #386641;
+}
+
 html {
     box-sizing: border-box;
     font-family: 'VT323', monospace;
@@ -22,6 +31,7 @@ html {
 }
 
 body {
+    display: grid;
     background-image: url('assets/background.jpeg');
     margin: 0;
     width: 100%;
@@ -30,7 +40,19 @@ body {
     background-attachment: scroll;
     background-position: center center; 
     background-size: cover;
-    display: grid;
+    position: relative;
+    grid-template-areas:
+        'widget main main'
+        'widget main main'
+        'footer footer footer';
+}
+
+.weather-widgets-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    grid-area: widget;
 }
 
 .widget {
@@ -44,8 +66,7 @@ body {
     font-weight: 400;
     text-align: center;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    width: fit-content;
-    height: fit-content;
+    min-width: 80%;  /* Adjusted width to fit horizontally */
 }
 
 .current-weather-widget__title,
@@ -54,4 +75,26 @@ body {
     font-weight: 700;
     margin-bottom: 10px;
     color: var(--main-color);
+}
+
+.time-widget {
+    color: var(--main-light);
+    font-size: 5rem;
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    justify-content: center;
+    align-items: center;
+    grid-area: main;
+    margin-top: 25rem;
+}
+
+.footer {
+    width: 100%;
+    text-align: center;
+    color: var(--main-light);
+    font-size: 1.2rem;
+    font-weight: 400;
+    padding: 10px;
+    grid-area: footer;
 }
